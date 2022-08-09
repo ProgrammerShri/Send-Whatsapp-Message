@@ -22,7 +22,7 @@ const Dashboard = () => {
   return (
     <>
       <AppHeading
-        variant="h3"
+        variant="h5"
         content="Send Whatsapp Message Without Saving On Your Device"
       />
       <Divider />
