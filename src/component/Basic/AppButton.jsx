@@ -4,12 +4,15 @@ import SendIcon from "@mui/icons-material/Send";
 
 const AppButton = ({ title = "Send", onClick , ...otherProps}) => {
   return (
-    <>
-      <Button variant="contained" endIcon={<SendIcon />} {...otherProps}>
-        Send
-      </Button>
-    </>
+  <>
+    <Button variant="contained" endIcon={<SendIcon />} onClick={onClick} {...otherProps} >
+      {title}
+    </Button>
+    
+  </>
   );
 };
 
 export default AppButton;
+
+
