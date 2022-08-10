@@ -5,7 +5,7 @@ import AppText from "../component/Basic/AppText";
 import AppInput from "../component/Basic/AppInput";
 import Paper from "@mui/material/Paper";
 import styled from "styled-components";
-import { Container } from "@mui/system";
+import AppList from "../component/AppList";
 
 const Dashboard = () => {
   const [mobileNumber, setMobileNumber] = useState("");
@@ -19,6 +19,22 @@ const Dashboard = () => {
     let url = `https://wa.me/${mobileNumber}`;
     window.open(url, "_blank");
     setMobileNumber("");
+    let loacalSaveddArray = window.localStorage.getItem("SearchedList");
+    if (loacalSaveddArray) {
+      loacalSaveddArray = JSON.parse(loacalSaveddArray);
+    } else {
+      loacalSaveddArray = [];
+    }
+
+    const currentUser = {
+      id: Math.random() * 100,
+      mobileNumber: mobileNumber,
+      searchedAt: new Date(),
+    };
+    
+    loacalSaveddArray.push(currentUser);
+    console.log(loacalSaveddArray);
+    window.localStorage.setItem("SearchedList", JSON.stringify(loacalSaveddArray));
   };
 
   return (
@@ -29,7 +45,6 @@ const Dashboard = () => {
           content="Send Whatsapp Message Without Saving Number On Your Device"
         />
       </MainHeading>
-      <Divider />
       <MainContainer>
         <SubHeadingContainer>
           <AppText variant="button" content="Enter number with country code" />
@@ -41,6 +56,7 @@ const Dashboard = () => {
         />
         <AppButton onClick={handleSubmit} disabled={mobileNumber.length < 10} />
       </MainContainer>
+      <AppList />
     </DashboardContainer>
   );
 };
