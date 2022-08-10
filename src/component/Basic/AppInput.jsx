@@ -28,7 +28,8 @@ const AppInput = ({
                   onClick={onClick}
                   style={{
                     cursor: "pointer",
-                    backgroundColor: "lightGray",
+                    backgroundColor: "#121212",
+                    color: "#00bcd4",
                     padding: "1rem",
                   }}
                 />
