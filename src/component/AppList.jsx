@@ -34,17 +34,22 @@ export function renderTime(timeStamp) {
 const AppList = () => {
   const [list, setList] = React.useState([]);
 
-  React.useEffect(() => {
+  const getListItems = () => {
     const searchedList = window.localStorage.getItem("SearchedList");
     if (searchedList) {
       setList(JSON.parse(searchedList));
     }
+  };
+
+  React.useEffect(() => {
+    getListItems();
   }, []);
 
   const handleDelete = (id) => {
     const newList = list.filter((item) => item.id !== id);
     setList(newList);
     window.localStorage.setItem("SearchedList", JSON.stringify(newList));
+    getListItems();
   };
 
   return (
@@ -57,7 +62,7 @@ const AppList = () => {
         <Grid item xs={12} md={10}>
           <HeadingContainer>
             <Typography
-              sx={{ my: 2, mx: 1, fontSize: "1.3rem", }}
+              sx={{ my: 2, mx: 1, fontSize: "1.3rem" }}
               variant="h6"
               component="div"
             >
