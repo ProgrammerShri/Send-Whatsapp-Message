@@ -1,3 +1,7 @@
+# Send-Whatsapp-Message-
+
+Send Whatsapp Message Without Saving Number On Device
+
 # Send Whatsapp Message Without Saving Number On Device
 
 <h3><a href="https://programmershri.github.io/Send-Whatsapp-Message/" target="_blank"><strong>Click Here For Live Demo »</strong></a></h3>
@@ -36,6 +40,16 @@ Just open this link and type someone whatsapp number with country code (91783942
 - No Privacy Sharing
 - Save Time & Effor (Don't need to add number in your device)
 - We don't need to delete them because we never saved their number.
+
+### Features
+
+- <b>Elegant Dark Mode</b>
+- <b>Paste Feature</b> : Directly Paste Number in the input field from clipboard
+- <b>History</b> : Show all the searched numbers in the history section
+- <b>Delete History</b> : Delete history of searched numbers by number or by all
+- <b>Directly send message without saving number in your device</b>
+- <b>Clean UI</b>
+- <b>Proper Validation</b>
 
 ### Built With
 
