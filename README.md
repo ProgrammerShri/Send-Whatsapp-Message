@@ -6,7 +6,8 @@
 
 ## About The Project
 
-![image](https://user-images.githubusercontent.com/64357112/183985833-70e6ca7c-53fa-46af-a43c-ed2006fb2d10.png)
+![whatsapp](https://user-images.githubusercontent.com/64357112/184003117-3f182e67-ce7b-4f0f-a780-130e1519f33a.png)
+
 
 In this app we can directly send the whatsaap message without saving any mobile number using your desktop or mobile device.
 
@@ -14,10 +15,9 @@ In this app we can directly send the whatsaap message without saving any mobile 
 
 We interact with many other people in our daily lives for a variety of reasons. But sometimes we don't want to connect with people for a long time or only for a short time. (For example, Messages or Media Forwarding, Document Sharing, etc...) and then we don't want to stay connected.
 
-In our daily life we use whatsapp as a primary messenger for communication. we don't want to save someone number for temporary reasons.
+In our daily life, we use WhatsApp as a primary messenger for communication. we don't want to save someone's number for temporary reasons.
 
-- When you're saving someone number in your device than the people will get more details about you
-  Like
+- When you're saving someone's number on your device then people will get more details about you Like
 
   - Profile Picture
   - Status
@@ -28,10 +28,9 @@ In our daily life we use whatsapp as a primary messenger for communication. we d
 
 ### Solution
 
-So the solution is that we can send messages or connect with prople with saving their mobile number in our device,
-Just open this link and type someone whatsapp number with country code (917839422XXX) and click send message then you can chat with him/her.
+So the solution is that we can send messages or connect with people by saving their mobile numbers on our device, Just open this link and 𝐭𝐲𝐩𝐞 𝐬𝐨𝐦𝐞𝐨𝐧𝐞'𝐬 𝐖𝐡𝐚𝐭𝐬𝐀𝐩𝐩 𝐧𝐮𝐦𝐛𝐞𝐫 𝐰𝐢𝐭𝐡 𝐜𝐨𝐮𝐧𝐭𝐫𝐲 𝐜𝐨𝐝𝐞 (917839422XXX) and click send a message then you can chat with him/her.
 
-### Benifits for using this app
+### Benifits of using this app
 
 - No Privacy Sharing
 - Save Time & Effor (Don't need to add number in your device)
