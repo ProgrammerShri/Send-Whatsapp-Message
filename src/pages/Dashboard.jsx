@@ -15,7 +15,10 @@ const Dashboard = () => {
   const [error, setError] = React.useState(false);
   const [isMobile, setIsMobile] = React.useState(false);
   const [isWhatsappInstalled, setIsWhatsappInstalled] = React.useState(false);
+
   const device = useDeviceDetect();
+
+  console.log("DD",device)
 
   const getListItems = () => {
     const searchedList = window.localStorage.getItem("SearchedList");
@@ -29,7 +32,7 @@ const Dashboard = () => {
     if (device === "mobile") {
       setIsMobile(true);
     }
-  }, [list.length]);
+  }, [list.length, device]);
 
   const handlePasteInput = async () => {
     const text = await navigator.clipboard.readText();
@@ -101,6 +104,8 @@ const Dashboard = () => {
     setIsWhatsappInstalled(e);
   };
 
+
+  console.log(isMobile)
   return (
     <DashboardContainer>
       <MainHeading>
@@ -119,7 +124,7 @@ const Dashboard = () => {
           value={mobileNumber}
           error={error}
         />
-        {!isMobile && (
+        {isMobile === false && (
           <DeviceOption onChange={(ev) => handleCheckWhatsappInstalled(ev)} />
         )}
         <AppButton
