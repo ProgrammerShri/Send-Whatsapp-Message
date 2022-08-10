@@ -10,6 +10,7 @@ import AppList from "../component/AppList";
 const Dashboard = () => {
   const [list, setList] = React.useState([]);
   const [mobileNumber, setMobileNumber] = React.useState("");
+  const [error, setError] = React.useState(false);
 
   const getListItems = () => {
     const searchedList = window.localStorage.getItem("SearchedList");
@@ -22,11 +23,15 @@ const Dashboard = () => {
     getListItems();
   }, [list.length]);
 
- 
-
   const handlePasteInput = async () => {
     const text = await navigator.clipboard.readText();
-    setMobileNumber(text);
+    // validate mobile number and set error if not valid else set mobile number to state
+    if (text.length === 10 && text.match(/^[0-9]+$/)) {
+      setMobileNumber(text);
+      setError(false);
+    } else {
+      setError(true);
+    }
   };
 
   const handleSubmit = async () => {
@@ -56,13 +61,24 @@ const Dashboard = () => {
     const newList = list.filter((item) => item.id !== id);
     setList(newList);
     await window.localStorage.setItem("SearchedList", JSON.stringify(newList));
-
   };
 
   const handleClear = async () => {
     setList([]);
     await window.localStorage.removeItem("SearchedList");
-  }
+  };
+
+  const handleChange = (e) => {
+    const re = /[0-9]/;
+    const isValid = re.test(e.target.value);
+    if (isValid || e.target.value === "") {
+      console.log("valid", e.target.value);
+      setMobileNumber(e.target.value);
+      setError(false);
+    } else {
+      setError(true);
+    }
+  };
 
   return (
     <DashboardContainer>
@@ -77,13 +93,18 @@ const Dashboard = () => {
           <AppText variant="button" content="Enter number with country code" />
         </SubHeadingContainer>
         <AppInput
-          onChange={(ev) => setMobileNumber(ev.target.value)}
+          onChange={(ev) => handleChange(ev)}
           onClick={handlePasteInput}
           value={mobileNumber}
+          error={error}
         />
-        <AppButton onClick={handleSubmit} disabled={mobileNumber.length < 10} />
+        <AppButton onClick={handleSubmit} disabled={mobileNumber.length < 10 || error} />
       </MainContainer>
-      <AppList list={list} onClick={(id) => handleDelete(id)} onClear={handleClear} />
+      <AppList
+        list={list}
+        onClick={(id) => handleDelete(id)}
+        onClear={handleClear}
+      />
     </DashboardContainer>
   );
 };

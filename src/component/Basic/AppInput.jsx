@@ -9,6 +9,7 @@ const AppInput = ({
   label = "Enter or Paste Whatsapp Number",
   onChange,
   onClick,
+  error = false,
   ...otherProps
 }) => {
   return (
@@ -19,6 +20,8 @@ const AppInput = ({
         onChange={onChange}
         sx={{ m: 1, width: "40ch" }}
         type="number"
+        error={error}
+        helperText={error ? "Please Enter Valid Whatsapp Number" : ""}
         {...otherProps}
         InputProps={{
           endAdornment: (
