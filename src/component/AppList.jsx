@@ -31,27 +31,7 @@ export function renderTime(timeStamp) {
   return dateString;
 }
 
-const AppList = () => {
-  const [list, setList] = React.useState([]);
-
-  const getListItems = () => {
-    const searchedList = window.localStorage.getItem("SearchedList");
-    if (searchedList) {
-      setList(JSON.parse(searchedList));
-    }
-  };
-
-  React.useEffect(() => {
-    getListItems();
-  }, []);
-
-  const handleDelete = (id) => {
-    const newList = list.filter((item) => item.id !== id);
-    setList(newList);
-    window.localStorage.setItem("SearchedList", JSON.stringify(newList));
-    getListItems();
-  };
-
+const AppList = ({ list, onClick, onClear }) => {
   return (
     <Box sx={{ width: "100%" }}>
       <Divider />
@@ -75,7 +55,7 @@ const AppList = () => {
               <Button
                 sx={{ my: 2, mx: 1 }}
                 variant="outlined"
-                onClick={() => console.log("DD")}
+                onClick={onClear}
               >
                 Clear All
               </Button>
@@ -106,7 +86,7 @@ const AppList = () => {
                     <IconButton
                       edge="end"
                       aria-label="delete"
-                      onClick={() => handleDelete(item.id)}
+                      onClick={() => onClick(item.id)}
                     >
                       <DeleteIcon />
                     </IconButton>

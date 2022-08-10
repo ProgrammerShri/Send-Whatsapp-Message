@@ -8,34 +8,61 @@ import styled from "styled-components";
 import AppList from "../component/AppList";
 
 const Dashboard = () => {
-  const [mobileNumber, setMobileNumber] = useState("");
+  const [list, setList] = React.useState([]);
+  const [mobileNumber, setMobileNumber] = React.useState("");
+
+  const getListItems = () => {
+    const searchedList = window.localStorage.getItem("SearchedList");
+    if (searchedList) {
+      setList(JSON.parse(searchedList));
+    }
+  };
+
+  React.useEffect(() => {
+    getListItems();
+  }, [list.length]);
+
+ 
 
   const handlePasteInput = async () => {
     const text = await navigator.clipboard.readText();
     setMobileNumber(text);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     let url = `https://wa.me/${mobileNumber}`;
     window.open(url, "_blank");
     setMobileNumber("");
     let loacalSaveddArray = window.localStorage.getItem("SearchedList");
-    if (loacalSaveddArray) {
-      loacalSaveddArray = JSON.parse(loacalSaveddArray);
-    } else {
-      loacalSaveddArray = [];
-    }
+    loacalSaveddArray
+      ? (loacalSaveddArray = JSON.parse(loacalSaveddArray))
+      : (loacalSaveddArray = []);
 
     const currentUser = {
       id: Math.random() * 100,
       mobileNumber: mobileNumber,
       searchedAt: new Date(),
     };
-    
+
     loacalSaveddArray.push(currentUser);
-    console.log(loacalSaveddArray);
-    window.localStorage.setItem("SearchedList", JSON.stringify(loacalSaveddArray));
+    setList(loacalSaveddArray);
+    window.localStorage.setItem(
+      "SearchedList",
+      JSON.stringify(loacalSaveddArray)
+    );
   };
+
+  const handleDelete = async (id) => {
+    const newList = list.filter((item) => item.id !== id);
+    setList(newList);
+    await window.localStorage.setItem("SearchedList", JSON.stringify(newList));
+
+  };
+
+  const handleClear = async () => {
+    setList([]);
+    await window.localStorage.removeItem("SearchedList");
+  }
 
   return (
     <DashboardContainer>
@@ -56,7 +83,7 @@ const Dashboard = () => {
         />
         <AppButton onClick={handleSubmit} disabled={mobileNumber.length < 10} />
       </MainContainer>
-      <AppList />
+      <AppList list={list} onClick={(id) => handleDelete(id)} onClear={handleClear} />
     </DashboardContainer>
   );
 };
