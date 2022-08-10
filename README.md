@@ -1,7 +1,3 @@
-# Send-Whatsapp-Message-
-
-Send Whatsapp Message Without Saving Number On Device
-
 # Send Whatsapp Message Without Saving Number On Device
 
 <h3><a href="https://programmershri.github.io/Send-Whatsapp-Message/" target="_blank"><strong>Click Here For Live Demo »</strong></a></h3>
