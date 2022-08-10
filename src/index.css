@@ -2,7 +2,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   height: 100vh;
   width: 100vw;
   background-color: #121212;
@@ -10,6 +9,6 @@ body {
   overflow: hidden;
 }
 
-.css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root {
+.css-1y6hco2-MuiInputBase-root-MuiOutlinedInput-root {
   padding-right: 0 !important;
 }

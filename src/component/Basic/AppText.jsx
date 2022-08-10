@@ -2,7 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
-const AppHeading = ({ variant = "h1", content = "Heading" }) => {
+const AppText = ({ variant = "h1", content = "Heading" }) => {
   return (
     <div>
       <Box sx={{ width: "100%", maxWidth: 800 }}>
@@ -14,4 +14,4 @@ const AppHeading = ({ variant = "h1", content = "Heading" }) => {
   );
 };
 
-export default AppHeading;
+export default AppText;

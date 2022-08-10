@@ -1,6 +1,5 @@
 import Dashboard from "./pages/Dashboard";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
 
 const darkTheme = createTheme({
   palette: {
@@ -20,18 +19,15 @@ const darkTheme = createTheme({
     fontWeightRegular: 400,
     fontWeightMedium: 500,
   },
-
 });
 
 function App() {
   return (
-    <ThemeProvider theme={darkTheme}>
-      <div className="App">
-        <div>
-          <Dashboard />
-        </div>
-      </div>
-    </ThemeProvider>
+    <>
+      <ThemeProvider theme={darkTheme}>
+        <Dashboard />
+      </ThemeProvider>
+    </>
   );
 }
 

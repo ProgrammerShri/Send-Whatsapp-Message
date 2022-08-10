@@ -1,7 +1,7 @@
 import { Divider } from "@mui/material";
 import React, { useState } from "react";
 import AppButton from "../component/Basic/AppButton";
-import AppHeading from "../component/Basic/AppHeading";
+import AppText from "../component/Basic/AppText";
 import AppInput from "../component/Basic/AppInput";
 import Paper from "@mui/material/Paper";
 
@@ -21,13 +21,13 @@ const Dashboard = () => {
 
   return (
     <>
-      <AppHeading
+      <AppText
         variant="h5"
         content="Send Whatsapp Message Without Saving On Your Device"
       />
       <Divider />
       <Paper>
-        <AppHeading variant="button" content="Enter number with country code" />
+        <AppText variant="button" content="Enter number with country code" />
         <AppInput
           onChange={(ev) => setMobileNumber(ev.target.value)}
           onClick={handlePasteInput}
