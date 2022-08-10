@@ -6,11 +6,16 @@ import AppInput from "../component/Basic/AppInput";
 import Paper from "@mui/material/Paper";
 import styled from "styled-components";
 import AppList from "../component/AppList";
+import useDeviceDetect from "../hooks/useDeviceDetect";
+import DeviceOption from "../component/DeviceOption";
 
 const Dashboard = () => {
   const [list, setList] = React.useState([]);
   const [mobileNumber, setMobileNumber] = React.useState("");
   const [error, setError] = React.useState(false);
+  const [isMobile, setIsMobile] = React.useState(false);
+  const [isWhatsappInstalled, setIsWhatsappInstalled] = React.useState(false);
+  const device = useDeviceDetect();
 
   const getListItems = () => {
     const searchedList = window.localStorage.getItem("SearchedList");
@@ -21,6 +26,9 @@ const Dashboard = () => {
 
   React.useEffect(() => {
     getListItems();
+    if (device === "mobile") {
+      setIsMobile(true);
+    }
   }, [list.length]);
 
   const handlePasteInput = async () => {
@@ -36,9 +44,17 @@ const Dashboard = () => {
 
   const handleSubmit = async () => {
     let url = `https://wa.me/${mobileNumber}`;
+
+    let INSTALLED_URL = `https://wa.me/${mobileNumber}`;
+    let WHATSAPP_WEB_URL = `https://web.whatsapp.com/send?phone=${mobileNumber}`;
+
+    isWhatsappInstalled ? (url = INSTALLED_URL) : (url = WHATSAPP_WEB_URL);
+
     window.open(url, "_blank");
     setMobileNumber("");
+
     let loacalSaveddArray = window.localStorage.getItem("SearchedList");
+
     loacalSaveddArray
       ? (loacalSaveddArray = JSON.parse(loacalSaveddArray))
       : (loacalSaveddArray = []);
@@ -50,7 +66,9 @@ const Dashboard = () => {
     };
 
     loacalSaveddArray.push(currentUser);
+
     setList(loacalSaveddArray);
+
     window.localStorage.setItem(
       "SearchedList",
       JSON.stringify(loacalSaveddArray)
@@ -72,12 +90,15 @@ const Dashboard = () => {
     const re = /[0-9]/;
     const isValid = re.test(e.target.value);
     if (isValid || e.target.value === "") {
-      console.log("valid", e.target.value);
       setMobileNumber(e.target.value);
       setError(false);
     } else {
       setError(true);
     }
+  };
+
+  const handleCheckWhatsappInstalled = (e) => {
+    setIsWhatsappInstalled(e);
   };
 
   return (
@@ -98,7 +119,14 @@ const Dashboard = () => {
           value={mobileNumber}
           error={error}
         />
-        <AppButton onClick={handleSubmit} disabled={mobileNumber.length < 10 || error} />
+        {!isMobile && (
+          <DeviceOption onChange={(ev) => handleCheckWhatsappInstalled(ev)} />
+        )}
+        <AppButton
+          onClick={handleSubmit}
+          title="Send Message"
+          disabled={mobileNumber.length < 10 || error}
+        />
       </MainContainer>
       <AppList
         list={list}
