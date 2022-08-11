@@ -18,7 +18,7 @@ const AppInput = ({
         label={label}
         id={id}
         onChange={onChange}
-        sx={{ m: 1, width: "40ch"  }}
+        sx={{ m: 1, width: "40ch" }}
         type="number"
         error={error}
         helperText={error ? "Please Enter Valid Whatsapp Number" : ""}
@@ -31,9 +31,7 @@ const AppInput = ({
                   onClick={onClick}
                   style={{
                     cursor: "pointer",
-                    backgroundColor: "#121212",
                     color: "#00bcd4",
-                    // padding: "1rem",
                   }}
                 />
               </Tooltip>

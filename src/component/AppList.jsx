@@ -1,11 +1,9 @@
 import * as React from "react";
-// import { styled } from '@mui/material/styles';
 import styled from "styled-components";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
@@ -18,9 +16,7 @@ import {
   Dialog,
   DialogTitle,
   Divider,
-  ListItemButton,
 } from "@mui/material";
-import { PersonPinCircleOutlined } from "@mui/icons-material";
 
 // Render Time (with format)
 export function renderTime(timeStamp) {
@@ -87,7 +83,6 @@ const AppList = ({ list, onClick, onClear, isMobile, isWhatsappInstalled }) => {
               {list.map((item) => (
                 <ListItemContainer key={item.id}>
                   <ListContainer
-                    // onClick={() => redirectUrl(item.mobileNumber)}
                     onClick={() => handleClickOpen(item.mobileNumber)}
                     href="#!"
                   >
@@ -176,7 +171,6 @@ function SimpleDialog(props) {
     selectedValue,
     open,
     isMobile,
-    isWhatsappInstalled,
     mobileNumber,
   } = props;
 
