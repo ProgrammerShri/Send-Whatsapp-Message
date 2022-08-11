@@ -18,8 +18,6 @@ const Dashboard = () => {
 
   const device = useDeviceDetect();
 
-  console.log("DD",device)
-
   const getListItems = () => {
     const searchedList = window.localStorage.getItem("SearchedList");
     if (searchedList) {
@@ -48,10 +46,12 @@ const Dashboard = () => {
   const handleSubmit = async () => {
     let url = `https://wa.me/${mobileNumber}`;
 
-    let INSTALLED_URL = `https://wa.me/${mobileNumber}`;
-    let WHATSAPP_WEB_URL = `https://web.whatsapp.com/send?phone=${mobileNumber}`;
+    if (!isMobile) {
+      let INSTALLED_URL = `https://wa.me/${mobileNumber}`;
+      let WHATSAPP_WEB_URL = `https://web.whatsapp.com/send?phone=${mobileNumber}`;
 
-    isWhatsappInstalled ? (url = INSTALLED_URL) : (url = WHATSAPP_WEB_URL);
+      isWhatsappInstalled ? (url = INSTALLED_URL) : (url = WHATSAPP_WEB_URL);
+    }
 
     window.open(url, "_blank");
     setMobileNumber("");
@@ -104,8 +104,6 @@ const Dashboard = () => {
     setIsWhatsappInstalled(e);
   };
 
-
-  console.log(isMobile)
   return (
     <DashboardContainer>
       <MainHeading>
@@ -137,6 +135,8 @@ const Dashboard = () => {
         list={list}
         onClick={(id) => handleDelete(id)}
         onClear={handleClear}
+        isMobile={isMobile}
+        isWhatsappInstalled={isWhatsappInstalled}
       />
     </DashboardContainer>
   );

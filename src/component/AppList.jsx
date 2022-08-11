@@ -13,7 +13,14 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Button, Divider, ListItemButton } from "@mui/material";
+import {
+  Button,
+  Dialog,
+  DialogTitle,
+  Divider,
+  ListItemButton,
+} from "@mui/material";
+import { PersonPinCircleOutlined } from "@mui/icons-material";
 
 // Render Time (with format)
 export function renderTime(timeStamp) {
@@ -31,7 +38,21 @@ export function renderTime(timeStamp) {
   return dateString;
 }
 
-const AppList = ({ list, onClick, onClear }) => {
+const AppList = ({ list, onClick, onClear, isMobile, isWhatsappInstalled }) => {
+  const [open, setOpen] = React.useState(false);
+  const [selectedValue, setSelectedValue] = React.useState(null);
+  const [mobileNumber, setMobileNumber] = React.useState(null);
+
+  const handleClickOpen = (mobileNumber) => {
+    setOpen(true);
+    setMobileNumber(mobileNumber);
+  };
+
+  const handleClose = (value) => {
+    setOpen(false);
+    setSelectedValue(value);
+  };
+
   return (
     <Box sx={{ width: "100%" }}>
       <Divider />
@@ -66,11 +87,9 @@ const AppList = ({ list, onClick, onClear }) => {
               {list.map((item) => (
                 <ListItemContainer key={item.id}>
                   <ListContainer
-                    href={`https://wa.me/${item.mobileNumber}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    component="a"
-                    button="true"
+                    // onClick={() => redirectUrl(item.mobileNumber)}
+                    onClick={() => handleClickOpen(item.mobileNumber)}
+                    href="#!"
                   >
                     <ListItemAvatar>
                       <Avatar>
@@ -97,6 +116,14 @@ const AppList = ({ list, onClick, onClear }) => {
           </div>
         </Grid>
       </Grid>
+      <SimpleDialog
+        selectedValue={selectedValue}
+        open={open}
+        onClose={handleClose}
+        isMobile={isMobile}
+        isWhatsappInstalled={isWhatsappInstalled}
+        mobileNumber={mobileNumber}
+      />
     </Box>
   );
 };
@@ -140,5 +167,61 @@ const DeleteIconContainer = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+const openOptions = ["WhatsApp Web", "WhatsApp App"];
+
+function SimpleDialog(props) {
+  const {
+    onClose,
+    selectedValue,
+    open,
+    isMobile,
+    isWhatsappInstalled,
+    mobileNumber,
+  } = props;
+
+  const handleClose = () => {
+    onClose(selectedValue);
+  };
+
+  const handleListItemClick = (value) => {
+    onClose(value);
+
+    let url = `https://wa.me/${mobileNumber}`;
+
+    if (!isMobile) {
+      let INSTALLED_URL = `https://wa.me/${mobileNumber}`;
+      let WHATSAPP_WEB_URL = `https://web.whatsapp.com/send?phone=${mobileNumber}`;
+
+      value === "WhatsApp App"
+        ? (url = INSTALLED_URL)
+        : (url = WHATSAPP_WEB_URL);
+    }
+
+    return window.open(url, "_blank");
+  };
+
+  return (
+    <Dialog onClose={handleClose} open={open}>
+      <DialogTitle>Open With</DialogTitle>
+      <List>
+        {openOptions.map((value) => (
+          <ListItem
+            button
+            onClick={() => handleListItemClick(value)}
+            key={value}
+          >
+            <ListItemAvatar>
+              <Avatar>
+                <WhatsAppIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText primary={value} />
+          </ListItem>
+        ))}
+      </List>
+    </Dialog>
+  );
+}
 
 export default AppList;
