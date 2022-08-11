@@ -39,6 +39,11 @@ const AppList = ({ list, onClick, onClear, isMobile, isWhatsappInstalled }) => {
     setMobileNumber(mobileNumber);
   };
 
+  const handleRedirect = (mobileNumber) => {
+    let url = `https://wa.me/${mobileNumber}`;
+    return window.open(url, "_blank");
+  };
+
   const handleClose = (value) => {
     setOpen(false);
     setSelectedValue(value);
@@ -78,7 +83,11 @@ const AppList = ({ list, onClick, onClear, isMobile, isWhatsappInstalled }) => {
               {list.map((item) => (
                 <ListItemContainer key={item.id}>
                   <ListContainer
-                    onClick={() => handleClickOpen(item.mobileNumber)}
+                    onClick={() =>
+                      isMobile
+                        ? handleRedirect(item.mobileNumber)
+                        : handleClickOpen(item.mobileNumber)
+                    }
                     href="#!"
                   >
                     <ListItemAvatar>
@@ -177,7 +186,7 @@ const ListItemContainer = styled(ListItem)`
 
   &:hover {
     background-color: #121212;
-  border: 1px solid #e0e0e0;
+    border: 1px solid #e0e0e0;
     color: #fff;
   }
 `;
